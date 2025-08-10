@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kathir Velan R - Full Stack Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'inter': ['Inter', 'sans-serif'],
+                },
+                colors: {
+                    'fiery-primary': '#ff4500',
+                    'fiery-secondary': '#ff8c00', 
+                    'fiery-accent': '#ffd700',
+                    'text-primary': '#ffffff',
+                    'text-secondary': '#ffb347',
+                    'bg-primary': '#0a0a0a',
+                    'bg-secondary': '#1a1a1a',
+                },
+                boxShadow: {
+                    'fiery-glow': '0 0 20px #ff4500, 0 0 40px #ff4500',
+                    'secondary-glow': '0 0 15px #ff8c00, 0 0 30px #ff8c00',
+                }
+            }
+        }
+    };
+    </script>
+
+    <style>
+        :root {
+            /* Fiery theme colors */
+            --primary-color: #ff4500;
+            --secondary-color: #ff8c00;
+            --accent-color: #ffd700;
+            --text-primary: #ffffff;
+            --text-secondary: #ffb347;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --glow-primary: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+            --glow-secondary: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .fiery-glow {
+            box-shadow: var(--glow-primary);
+        }
+
+        .secondary-glow {
+            box-shadow: var(--glow-secondary);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-secondary);
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+            box-shadow: var(--glow-primary);
+        }
+
+        .nav-link:hover {
+            text-shadow: var(--glow-primary);
+        }
+
+        .profile-upload:hover {
+            box-shadow: var(--glow-primary);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-bg-primary text-text-primary">
+
+    <!-- Navigation -->
+    <!-- @COMPONENT: NavigationBar [responsive navigation with mobile menu] -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/95 backdrop-blur-sm border-b border-fiery-primary/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <div class="w-10 h-10 bg-fiery-primary rounded-full flex items-center justify-center fiery-glow">
+                        <span class="text-white font-bold text-lg">KV</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-text-primary hover:text-fiery-accent px-3 py-2 text-sm font-medium transition-all duration-300">Home</a>
+                        <a href="#about" class="nav-link text-text-primary hover:text-fiery-accent px-3 py-2 text-sm font-medium transition-all duration-300">About</a>
+                        <a href="#skills" class="nav-link text-text-primary hover:text-fiery-accent px-3 py-2 text-sm font-medium transition-all duration-300">Skills</a>
+                        <a href="#projects" class="nav-link text-text-primary hover:text-fiery-accent px-3 py-2 text-sm font-medium transition-all duration-300">Projects</a>
+                        <a href="#contact" class="nav-link text-text-primary hover:text-fiery-accent px-3 py-2 text-sm font-medium transition-all duration-300">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-text-primary hover:text-fiery-accent p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-bg-secondary z-50 md:hidden">
+            <div class="p-4">
+                <button id="close-menu-btn" class="text-text-primary hover:text-fiery-accent mb-8">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="nav-link text-text-primary hover:text-fiery-accent py-2 text-lg font-medium">Home</a>
+                    <a href="#about" class="nav-link text-text-primary hover:text-fiery-accent py-2 text-lg font-medium">About</a>
+                    <a href="#skills" class="nav-link text-text-primary hover:text-fiery-accent py-2 text-lg font-medium">Skills</a>
+                    <a href="#projects" class="nav-link text-text-primary hover:text-fiery-accent py-2 text-lg font-medium">Projects</a>
+                    <a href="#contact" class="nav-link text-text-primary hover:text-fiery-accent py-2 text-lg font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: NavigationBar -->
+
+    <!-- Hero Section -->
+    <!-- @COMPONENT: HeroSection [main introduction with profile image upload] -->
+    <section id="home" class="min-h-screen flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-text-secondary text-lg mb-2" data-bind="user.greeting">Hi, I'm</h3>
+                        <h1 class="text-5xl lg:text-6xl font-bold mb-4">
+                            <span class="gradient-text" data-bind="user.name">Kathir Velan R</span>
+                        </h1>
+                        <h2 class="text-2xl lg:text-3xl text-text-secondary mb-6" data-bind="user.title">
+                            Full-Stack Web Developer & React Enthusiast
+                        </h2>
+                    </div>
+                    
+                    <p class="text-text-secondary text-lg leading-relaxed max-w-2xl" data-bind="user.summary">
+                        Aspiring Full-Stack Web Developer with strong passion for front-end technologies and proven expertise in React.js. 
+                        Mechanical Engineering student committed to delivering innovative solutions and building responsive, user-centric applications.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button class="bg-fiery-primary hover:bg-fiery-secondary px-8 py-3 rounded-lg text-white font-semibold fiery-glow hover:secondary-glow transition-all duration-300" data-event="click:handleContactMe">
+                            Contact Me
+                        </button>
+                        <button class="border-2 border-fiery-accent text-fiery-accent hover:bg-fiery-accent hover:text-bg-primary px-8 py-3 rounded-lg font-semibold transition-all duration-300" data-event="click:handleViewWork">
+                            View My Work
+                        </button>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex space-x-6 pt-4">
+                        <a href="#" class="text-text-secondary hover:text-fiery-accent text-2xl transition-colors duration-300" data-link="user.linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-text-secondary hover:text-fiery-accent text-2xl transition-colors duration-300" data-link="user.github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="text-text-secondary hover:text-fiery-accent text-2xl transition-colors duration-300" data-link="user.blog">
+                            <i class="fas fa-blog"></i>
+                        </a>
+                        <a href="#" class="text-text-secondary hover:text-fiery-accent text-2xl transition-colors duration-300" data-link="user.hackerrank">
+                            <i class="fab fa-hackerrank"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Content - Profile Image -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <!-- Profile Image Container -->
+                        <div class="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden bg-bg-secondary border-4 border-fiery-primary fiery-glow">
+                            <!-- Professional model portrait for demonstration -->
+                            <img 
+                                id="profile-image" 
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800" 
+                                alt="Kathir Velan R - Full Stack Developer" 
+                                class="w-full h-full object-cover"
+                                data-mock-image="true"
+                                data-implementation="Replace with user uploaded image"
+                            />
+                        </div>
+
+                        <!-- Image Upload Button -->
+                        <div class="absolute bottom-4 right-4">
+                            <label class="profile-upload cursor-pointer bg-fiery-primary hover:bg-fiery-secondary p-3 rounded-full text-white transition-all duration-300">
+                                <i class="fas fa-camera"></i>
+                                <input 
+                                    type="file" 
+                                    id="image-upload" 
+                                    accept="image/*" 
+                                    class="hidden"
+                                    data-event="change:handleImageUpload"
+                                />
+                            </label>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-4 -left-4 w-24 h-24 border-2 border-fiery-accent rounded-full pulse-glow"></div>
+                        <div class="absolute -bottom-6 -right-6 w-16 h-16 bg-fiery-secondary rounded-full pulse-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- About Section -->
+    <!-- @COMPONENT: AboutSection [executive summary and personal details] -->
+    <section id="about" class="py-20 bg-bg-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">About Me</h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">
+                    Get to know more about my background, skills, and passion for development
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold text-fiery-accent mb-4">Executive Summary</h3>
+                    <p class="text-text-secondary leading-relaxed" data-bind="user.executiveSummary">
+                        Results-driven Mechanical Engineering student with a strong passion for full-stack development and proven expertise in front-end 
+                        technologies. Proficient in HTML, CSS, and Java, with a focused aspiration to specialize in React.js. Demonstrates excellent coding 
+                        proficiency, problem-solving skills, and the ability to build responsive, user-centric applications. Committed to continuous learning 
+                        and leveraging technical expertise to deliver innovative solutions within software development and engineering domains.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="text-center p-4 bg-bg-primary rounded-lg border border-fiery-primary/20">
+                            <div class="text-3xl font-bold text-fiery-primary" data-bind="stats.projects">5+</div>
+                            <div class="text-text-secondary">Projects</div>
+                        </div>
+                        <div class="text-center p-4 bg-bg-primary rounded-lg border border-fiery-primary/20">
+                            <div class="text-3xl font-bold text-fiery-secondary" data-bind="stats.users">3000+</div>
+                            <div class="text-text-secondary">Users Helped</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold text-fiery-accent mb-4">Education & Experience</h3>
+                    
+                    <!-- Education -->
+                    <div class="bg-bg-primary p-6 rounded-lg border border-fiery-primary/20">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-fiery-primary rounded-full flex items-center justify-center fiery-glow flex-shrink-0">
+                                <i class="fas fa-graduation-cap text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-text-primary" data-bind="education.degree">B.E Mechanical Engineering</h4>
+                                <p class="text-fiery-accent" data-bind="education.institution">Rajalakshmi Institute of Technology</p>
+                                <p class="text-text-secondary text-sm" data-bind="education.period">Sep 2024 - Present</p>
+                                <p class="text-text-secondary mt-2" data-bind="education.performance">CGPA: 8.775 (Up to 2nd semester)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Internship -->
+                    <div class="bg-bg-primary p-6 rounded-lg border border-fiery-secondary/20">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-fiery-secondary rounded-full flex items-center justify-center secondary-glow flex-shrink-0">
+                                <i class="fas fa-briefcase text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-text-primary" data-bind="internship.role">Full Stack Web Developer</h4>
+                                <p class="text-fiery-secondary" data-bind="internship.company">TechnoHacks Solutions</p>
+                                <p class="text-text-secondary text-sm" data-bind="internship.period">Jul 2025 - Aug 2025</p>
+                                <p class="text-text-secondary mt-2" data-bind="internship.description">
+                                    Gained experience in full-stack development using HTML, CSS, JavaScript, and React.js. 
+                                    Worked on RESTful APIs and database management within an Agile environment.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AboutSection -->
+
+    <!-- Skills Section -->
+    <!-- @COMPONENT: SkillsSection [visual skills representation with categories] -->
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Skills & Technologies</h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">
+                    A comprehensive overview of my technical skills and proficiencies
+                </p>
+            </div>
+
+            <!-- @MAP: skillCategories.map(category => ( -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div class="skill-card bg-bg-secondary p-6 rounded-lg border border-fiery-primary/20 transition-all duration-300 hover:scale-105">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-fiery-primary rounded-full flex items-center justify-center mx-auto fiery-glow">
+                            <i class="fas fa-code text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-fiery-accent mt-4">Programming Languages</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="skill-item" data-bind="skills.java">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">Java</span>
+                                <span class="text-fiery-accent text-sm">Advanced</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-primary h-2 rounded-full w-[85%] fiery-glow"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-bind="skills.python">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">Python</span>
+                                <span class="text-fiery-accent text-sm">Intermediate</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-secondary h-2 rounded-full w-[70%] secondary-glow"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-bind="skills.c">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">C</span>
+                                <span class="text-fiery-accent text-sm">Intermediate</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-secondary h-2 rounded-full w-[75%] secondary-glow"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend Development -->
+                <div class="skill-card bg-bg-secondary p-6 rounded-lg border border-fiery-secondary/20 transition-all duration-300 hover:scale-105">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-fiery-secondary rounded-full flex items-center justify-center mx-auto secondary-glow">
+                            <i class="fas fa-palette text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-fiery-accent mt-4">Frontend Development</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="skill-item" data-bind="skills.html">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">HTML</span>
+                                <span class="text-fiery-accent text-sm">Expert</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-primary h-2 rounded-full w-[90%] fiery-glow"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-bind="skills.css">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">CSS</span>
+                                <span class="text-fiery-accent text-sm">Expert</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-primary h-2 rounded-full w-[88%] fiery-glow"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-bind="skills.javascript">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">JavaScript</span>
+                                <span class="text-fiery-accent text-sm">Advanced</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-secondary h-2 rounded-full w-[82%] secondary-glow"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-bind="skills.react">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">React.js</span>
+                                <span class="text-fiery-accent text-sm">Advanced</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-accent h-2 rounded-full w-[80%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Others -->
+                <div class="skill-card bg-bg-secondary p-6 rounded-lg border border-fiery-accent/20 transition-all duration-300 hover:scale-105">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-fiery-accent rounded-full flex items-center justify-center mx-auto">
+                            <i class="fas fa-tools text-bg-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-fiery-accent mt-4">Tools & Others</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="skill-item" data-bind="skills.git">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">Git & GitHub</span>
+                                <span class="text-fiery-accent text-sm">Advanced</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-primary h-2 rounded-full w-[85%] fiery-glow"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-bind="skills.problem-solving">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">Problem Solving</span>
+                                <span class="text-fiery-accent text-sm">Expert</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-secondary h-2 rounded-full w-[90%] secondary-glow"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-bind="skills.responsive-design">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-text-primary">Responsive Design</span>
+                                <span class="text-fiery-accent text-sm">Advanced</span>
+                            </div>
+                            <div class="w-full bg-bg-primary rounded-full h-2">
+                                <div class="bg-fiery-accent h-2 rounded-full w-[83%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_MAP )) -->
+
+            <!-- Certifications -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-semibold text-center text-fiery-accent mb-8">Certifications</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- @MAP: certifications.map(cert => ( -->
+                    <div class="bg-bg-secondary p-4 rounded-lg border border-fiery-primary/20 text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-certificate text-fiery-accent text-2xl mb-2"></i>
+                        <h4 class="text-text-primary font-semibold" data-bind="cert.name">HTML</h4>
+                        <p class="text-text-secondary text-sm" data-bind="cert.issuer">LinkedIn Learning</p>
+                    </div>
+                    <div class="bg-bg-secondary p-4 rounded-lg border border-fiery-primary/20 text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-certificate text-fiery-accent text-2xl mb-2"></i>
+                        <h4 class="text-text-primary font-semibold" data-bind="cert.name">CSS</h4>
+                        <p class="text-text-secondary text-sm" data-bind="cert.issuer">LinkedIn Learning</p>
+                    </div>
+                    <div class="bg-bg-secondary p-4 rounded-lg border border-fiery-primary/20 text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-certificate text-fiery-accent text-2xl mb-2"></i>
+                        <h4 class="text-text-primary font-semibold" data-bind="cert.name">JavaScript</h4>
+                        <p class="text-text-secondary text-sm" data-bind="cert.issuer">LinkedIn Learning</p>
+                    </div>
+                    <div class="bg-bg-secondary p-4 rounded-lg border border-fiery-primary/20 text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-certificate text-fiery-accent text-2xl mb-2"></i>
+                        <h4 class="text-text-primary font-semibold" data-bind="cert.name">Python</h4>
+                        <p class="text-text-secondary text-sm" data-bind="cert.issuer">Great Learning</p>
+                    </div>
+                    <div class="bg-bg-secondary p-4 rounded-lg border border-fiery-primary/20 text-center hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-certificate text-fiery-accent text-2xl mb-2"></i>
+                        <h4 class="text-text-primary font-semibold" data-bind="cert.name">Git & GitHub</h4>
+                        <p class="text-text-secondary text-sm" data-bind="cert.issuer">LinkedIn Learning</p>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: SkillsSection -->
+
+    <!-- Projects Section -->
+    <!-- @COMPONENT: ProjectsSection [showcase of major projects with details] -->
+    <section id="projects" class="py-20 bg-bg-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Featured Projects</h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">
+                    A showcase of my recent work and personal projects
+                </p>
+            </div>
+
+            <!-- @MAP: projects.map(project => ( -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <!-- Project 1: RIT GPA Calculator -->
+                <div class="order-2 lg:order-1">
+                    <div class="project-card bg-bg-primary p-8 rounded-lg border border-fiery-primary/20 transition-all duration-300">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-2xl font-bold text-fiery-accent" data-bind="project.title">RIT GPA & CGPA Calculator</h3>
+                            <span class="text-fiery-primary text-sm bg-fiery-primary/20 px-3 py-1 rounded-full" data-bind="project.status">Completed</span>
+                        </div>
+                        
+                        <p class="text-text-secondary leading-relaxed mb-6" data-bind="project.description">
+                            Developed a responsive web-based GPA & CGPA Calculator specifically for Rajalakshmi Institute of 
+                            Technology students. The application enables users to input grades and credits to compute accurate 
+                            GPA/CGPA using the university's official formula.
+                        </p>
+
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold text-text-primary mb-3">Technologies Used:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-fiery-primary/20 text-fiery-primary px-3 py-1 rounded-full text-sm" data-bind="tech">HTML</span>
+                                <span class="bg-fiery-secondary/20 text-fiery-secondary px-3 py-1 rounded-full text-sm" data-bind="tech">CSS</span>
+                                <span class="bg-fiery-accent/20 text-fiery-accent px-3 py-1 rounded-full text-sm" data-bind="tech">JavaScript</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold text-text-primary mb-3">Key Achievements:</h4>
+                            <ul class="text-text-secondary space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-fiery-accent mt-1 mr-2 flex-shrink-0"></i>
+                                    Helped over 3000+ students streamline academic tracking
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-fiery-accent mt-1 mr-2 flex-shrink-0"></i>
+                                    Improved calculation accuracy and reduced manual errors
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-fiery-accent mt-1 mr-2 flex-shrink-0"></i>
+                                    Received positive feedback for UI/UX design
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <button class="bg-fiery-primary hover:bg-fiery-secondary px-6 py-2 rounded-lg text-white font-semibold transition-all duration-300" data-event="click:handleViewProject">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </button>
+                            <button class="border border-fiery-accent text-fiery-accent hover:bg-fiery-accent hover:text-bg-primary px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-event="click:handleViewCode">
+                                <i class="fab fa-github mr-2"></i>Source Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <!-- Screenshot or mockup of the GPA calculator interface -->
+                    <img 
+                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                        alt="RIT GPA Calculator Interface" 
+                        class="rounded-lg shadow-lg w-full h-auto border border-fiery-primary/20"
+                        data-mock-image="true"
+                    />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Project 2: Netflix Clone -->
+                <div class="order-1">
+                    <!-- Screenshot of Netflix clone homepage -->
+                    <img 
+                        src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                        alt="Netflix Clone Web Page Interface" 
+                        class="rounded-lg shadow-lg w-full h-auto border border-fiery-secondary/20"
+                        data-mock-image="true"
+                    />
+                </div>
+
+                <div class="order-2">
+                    <div class="project-card bg-bg-primary p-8 rounded-lg border border-fiery-secondary/20 transition-all duration-300">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-2xl font-bold text-fiery-accent" data-bind="project.title">Netflix Clone Web Page</h3>
+                            <span class="text-fiery-secondary text-sm bg-fiery-secondary/20 px-3 py-1 rounded-full" data-bind="project.status">Completed</span>
+                        </div>
+                        
+                        <p class="text-text-secondary leading-relaxed mb-6" data-bind="project.description">
+                            A responsive front-end development project that replicates Netflix's homepage interface. 
+                            Built to practice and enhance front-end web development skills, focusing on UI/UX design 
+                            and responsive layouts across various device sizes.
+                        </p>
+
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold text-text-primary mb-3">Technologies Used:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-fiery-primary/20 text-fiery-primary px-3 py-1 rounded-full text-sm" data-bind="tech">HTML</span>
+                                <span class="bg-fiery-secondary/20 text-fiery-secondary px-3 py-1 rounded-full text-sm" data-bind="tech">CSS</span>
+                                <span class="bg-fiery-accent/20 text-fiery-accent px-3 py-1 rounded-full text-sm" data-bind="tech">JavaScript</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold text-text-primary mb-3">Key Features:</h4>
+                            <ul class="text-text-secondary space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-fiery-accent mt-1 mr-2 flex-shrink-0"></i>
+                                    Interactive navigation menus and buttons
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-fiery-accent mt-1 mr-2 flex-shrink-0"></i>
+                                    Responsive design across all device sizes
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-fiery-accent mt-1 mr-2 flex-shrink-0"></i>
+                                    Smooth hover effects and transitions
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <button class="bg-fiery-primary hover:bg-fiery-secondary px-6 py-2 rounded-lg text-white font-semibold transition-all duration-300" data-event="click:handleViewProject">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </button>
+                            <button class="border border-fiery-accent text-fiery-accent hover:bg-fiery-accent hover:text-bg-primary px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-event="click:handleViewCode">
+                                <i class="fab fa-github mr-2"></i>Source Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_MAP )) -->
+
+            <!-- Achievements Section -->
+            <div class="mt-20">
+                <h3 class="text-2xl font-semibold text-center text-fiery-accent mb-8">Achievements</h3>
+                <div class="bg-bg-primary p-8 rounded-lg border border-fiery-accent/20">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-fiery-accent rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-trophy text-bg-primary text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-fiery-accent mb-2" data-bind="achievement.title">30 Days HackerRank Challenge</h4>
+                            <p class="text-text-secondary text-sm mb-4" data-bind="achievement.period">January 2025 - March 2025</p>
+                            <p class="text-text-secondary leading-relaxed" data-bind="achievement.description">
+                                Successfully completed the 30 Days of Code challenge on HackerRank, solving 64 coding problems in Java. 
+                                The challenge focused on core programming concepts such as data types, loops, conditionals, 
+                                object-oriented programming, arrays, recursion, and more.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ProjectsSection -->
+
+    <!-- Contact Section -->
+    <!-- @COMPONENT: ContactSection [contact form and information] -->
+    <section id="contact" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Get In Touch</h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">
+                    Let's discuss opportunities, collaborations, or just have a chat about technology!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-fiery-accent mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-fiery-primary rounded-full flex items-center justify-center fiery-glow">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-text-primary font-semibold">Email</p>
+                                    <p class="text-text-secondary" data-bind="contact.email">kathirvelankvr@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-fiery-secondary rounded-full flex items-center justify-center secondary-glow">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-text-primary font-semibold">Phone</p>
+                                    <p class="text-text-secondary" data-bind="contact.phone">+91 9025132739</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-fiery-accent rounded-full flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-bg-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-text-primary font-semibold">Location</p>
+                                    <p class="text-text-secondary" data-bind="contact.location">Cheyyanur Village, Tiruvannamalai District</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-fiery-accent mb-4">Connect With Me</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-bg-secondary border border-fiery-primary/20 rounded-full flex items-center justify-center text-fiery-primary hover:bg-fiery-primary hover:text-white transition-all duration-300" data-link="social.linkedin">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-bg-secondary border border-fiery-primary/20 rounded-full flex items-center justify-center text-fiery-primary hover:bg-fiery-primary hover:text-white transition-all duration-300" data-link="social.github">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-bg-secondary border border-fiery-primary/20 rounded-full flex items-center justify-center text-fiery-primary hover:bg-fiery-primary hover:text-white transition-all duration-300" data-link="social.blog">
+                                <i class="fas fa-blog text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-bg-secondary border border-fiery-primary/20 rounded-full flex items-center justify-center text-fiery-primary hover:bg-fiery-primary hover:text-white transition-all duration-300" data-link="social.hackerrank">
+                                <i class="fab fa-hackerrank text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-bg-secondary border border-fiery-primary/20 rounded-full flex items-center justify-center text-fiery-primary hover:bg-fiery-primary hover:text-white transition-all duration-300" data-link="social.leetcode">
+                                <i class="fas fa-code text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-bg-secondary p-8 rounded-lg border border-fiery-primary/20">
+                    <h3 class="text-2xl font-semibold text-fiery-accent mb-6">Send Me a Message</h3>
+                    <form class="space-y-6" data-event="submit:handleContactSubmit">
+                        <div>
+                            <label class="block text-text-primary font-semibold mb-2" for="name">Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                class="w-full px-4 py-3 bg-bg-primary border border-fiery-primary/20 rounded-lg text-text-primary focus:outline-none focus:border-fiery-primary focus:ring-2 focus:ring-fiery-primary/20 transition-all duration-300"
+                                placeholder="Your Name"
+                                required
+                                data-bind="form.name"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-text-primary font-semibold mb-2" for="email">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="w-full px-4 py-3 bg-bg-primary border border-fiery-primary/20 rounded-lg text-text-primary focus:outline-none focus:border-fiery-primary focus:ring-2 focus:ring-fiery-primary/20 transition-all duration-300"
+                                placeholder="your.email@example.com"
+                                required
+                                data-bind="form.email"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-text-primary font-semibold mb-2" for="subject">Subject</label>
+                            <input 
+                                type="text" 
+                                id="subject" 
+                                class="w-full px-4 py-3 bg-bg-primary border border-fiery-primary/20 rounded-lg text-text-primary focus:outline-none focus:border-fiery-primary focus:ring-2 focus:ring-fiery-primary/20 transition-all duration-300"
+                                placeholder="Subject"
+                                required
+                                data-bind="form.subject"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-text-primary font-semibold mb-2" for="message">Message</label>
+                            <textarea 
+                                id="message" 
+                                rows="5" 
+                                class="w-full px-4 py-3 bg-bg-primary border border-fiery-primary/20 rounded-lg text-text-primary focus:outline-none focus:border-fiery-primary focus:ring-2 focus:ring-fiery-primary/20 transition-all duration-300 resize-none"
+                                placeholder="Your message here..."
+                                required
+                                data-bind="form.message"
+                            ></textarea>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            class="w-full bg-fiery-primary hover:bg-fiery-secondary px-8 py-3 rounded-lg text-white font-semibold fiery-glow hover:secondary-glow transition-all duration-300"
+                            data-event="click:handleSendMessage"
+                        >
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- Footer -->
+    <!-- @COMPONENT: Footer [copyright and additional links] -->
+    <footer class="bg-bg-secondary border-t border-fiery-primary/20 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary">
+                    © 2024 <span class="text-fiery-accent" data-bind="user.name">Kathir Velan R</span>. All rights reserved.
+                </p>
+                <p class="text-text-secondary text-sm mt-2">
+                    Built with <span class="text-fiery-primary">❤️</span> using React.js and Tailwind CSS
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // Mobile menu functionality
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+
+            function openMenu() {
+                mobileMenu.classList.add('open');
+            }
+
+            function closeMenu() {
+                mobileMenu.classList.remove('open');
+            }
+
+            mobileMenuBtn.addEventListener('click', openMenu);
+            closeMenuBtn.addEventListener('click', closeMenu);
+
+            // Close menu when clicking on navigation links
+            const navLinks = mobileMenu.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                    closeMenu();
+                }
+            });
+        })();
+
+        // Image upload functionality
+        (function() {
+            const imageUpload = document.getElementById('image-upload');
+            const profileImage = document.getElementById('profile-image');
+
+            if (imageUpload && profileImage) {
+                imageUpload.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            profileImage.src = e.target.result;
+                            profileImage.alt = "User uploaded profile picture";
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        })();
+
+        // Smooth scrolling for navigation links
+        (function() {
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80; // Account for fixed header
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+
+        // Contact form handling (placeholder)
+        (function() {
+            const contactForm = document.querySelector('form[data-event="submit:handleContactSubmit"]');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement actual form submission logic
+                    alert('Thank you for your message! I\'ll get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+        })();
+
+        // Add scroll effect to navigation
+        (function() {
+            const nav = document.querySelector('nav');
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener('scroll', function() {
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    nav.style.transform = 'translateY(-100%)';
+                } else {
+                    nav.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollY = currentScrollY;
+            });
+        })();
+    </script>
+</body>
+</html>
