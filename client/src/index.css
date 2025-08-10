@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Fiery theme colors */
+  --fiery-primary: hsl(16, 100%, 50%);
+  --fiery-secondary: hsl(33, 100%, 50%);
+  --fiery-accent: hsl(51, 100%, 50%);
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: hsl(33, 100%, 64%);
+  --bg-primary: hsl(0, 0%, 4%);
+  --bg-secondary: hsl(0, 0%, 10%);
+  
+  /* Original shadcn colors */
+  --background: hsl(0, 0%, 4%);
+  --foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 10%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --popover: hsl(0, 0%, 4%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --primary: hsl(16, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 10%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(0, 0%, 15%);
+  --muted-foreground: hsl(33, 100%, 64%);
+  --accent: hsl(51, 100%, 50%);
+  --accent-foreground: hsl(0, 0%, 4%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(16, 100%, 50%, 0.2);
+  --input: hsl(0, 0%, 10%);
+  --ring: hsl(16, 100%, 50%);
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(0, 0%, 4%);
+  --foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 10%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --popover: hsl(0, 0%, 4%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --primary: hsl(16, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 10%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(0, 0%, 15%);
+  --muted-foreground: hsl(33, 100%, 64%);
+  --accent: hsl(51, 100%, 50%);
+  --accent-foreground: hsl(0, 0%, 4%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(16, 100%, 50%, 0.2);
+  --input: hsl(0, 0%, 10%);
+  --ring: hsl(16, 100%, 50%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .fiery-glow {
+    box-shadow: 0 0 20px var(--fiery-primary), 0 0 40px var(--fiery-primary);
+  }
+
+  .secondary-glow {
+    box-shadow: 0 0 15px var(--fiery-secondary), 0 0 30px var(--fiery-secondary);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--fiery-primary), var(--fiery-secondary), var(--fiery-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      opacity: 1; 
+    }
+    50% { 
+      opacity: 0.7; 
+    }
+  }
+
+  .mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  .skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--fiery-secondary), 0 0 30px var(--fiery-secondary);
+  }
+
+  .project-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px var(--fiery-primary), 0 0 40px var(--fiery-primary);
+  }
+
+  .nav-link:hover {
+    text-shadow: 0 0 20px var(--fiery-primary), 0 0 40px var(--fiery-primary);
+  }
+
+  .profile-upload:hover {
+    box-shadow: 0 0 20px var(--fiery-primary), 0 0 40px var(--fiery-primary);
+  }
+}
