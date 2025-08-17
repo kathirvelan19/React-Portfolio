@@ -1,10 +1,11 @@
 {
-  "homepage": "https://kathirvelan.github.io/my-react-project",
+  "homepage": "https://kathirvelan19.github.io/portfolio",
   "name": "rest-express",
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
   "scripts": {
+   
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "NODE_ENV=development tsx server/index.ts",
